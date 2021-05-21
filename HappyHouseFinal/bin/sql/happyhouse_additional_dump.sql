@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`article` (
   `subject` VARCHAR(100) NOT NULL,
   `content` VARCHAR(2000) NOT NULL,
   `regtime` TIMESTAMP NOT NULL DEFAULT current_timestamp,
-  INDEX `article_id_FK_idx` (`id` ASC ) VISIBLE,
+  INDEX `article_id_FK_idx` (`id` ASC ),
   PRIMARY KEY (`articleno`),
   CONSTRAINT `article_id_FK`
     FOREIGN KEY (`id`)
@@ -79,7 +79,7 @@ DROP TABLE IF EXISTS `happyhouse`.`interest` ;
 CREATE TABLE IF NOT EXISTS `happyhouse`.`interest` (
   `id` VARCHAR(30) NOT NULL,
   `dong` VARCHAR(30) NOT NULL,
-  INDEX `interest_id_FK_idx` (`id` ASC ) VISIBLE,
+  INDEX `interest_id_FK_idx` (`id` ASC ),
   PRIMARY KEY (`id`,`dong`),
   CONSTRAINT `interest_id_FK`
     FOREIGN KEY (`id`)
@@ -94,21 +94,21 @@ insert into interest (id, dong) values ('ssafy', '용문동');
 -- -----------------------------------------------------
 -- Table `happyhouse`.`envcheck`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `happyhouse`.`envcheck` ;
+-- DROP TABLE IF EXISTS `happyhouse`.`envcheck` ;
 
-CREATE TABLE IF NOT EXISTS `happyhouse`.`envcheck` (
-  `coname`		VARCHAR(30) NOT NULL,
-  `cotype`	 	VARCHAR(30) NOT NULL,
-  `checkdate`	VARCHAR(10) NOT NULL,
-  `hasproblem`	VARCHAR(1)	NOT NULL,
-  `checkdetail`	VARCHAR(40) NOT NULL,
-  `dong`		VARCHAR(30) NOT NULL,
-  `coaddr`	 	VARCHAR(60) NOT NULL,
+-- CREATE TABLE IF NOT EXISTS `happyhouse`.`envcheck` (
+--   `coname`		VARCHAR(30) NOT NULL,
+--   `cotype`	 	VARCHAR(30) NOT NULL,
+--   `checkdate`	VARCHAR(10) NOT NULL,
+--   `hasproblem`	VARCHAR(1)	NOT NULL,
+--   `checkdetail`	VARCHAR(40) NOT NULL,
+--   `dong`		VARCHAR(30) NOT NULL,
+--   `coaddr`	 	VARCHAR(60) NOT NULL,
 
-  
-  PRIMARY KEY (`coname`,`checkdate`,`checkdetail`)
-)
-ENGINE = InnoDB;
+--   
+--   PRIMARY KEY (`coname`,`checkdate`,`checkdetail`)
+-- )
+-- ENGINE = InnoDB;
 
 -- input csv
 
