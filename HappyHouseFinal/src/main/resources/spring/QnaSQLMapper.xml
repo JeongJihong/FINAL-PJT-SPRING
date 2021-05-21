@@ -52,8 +52,8 @@
 	
 	<update id="modifyAnswer" parameterType="QnaDTO">
 		update qna
-		set subject = #{subject}, content = #{content}
-		where id = #{id}
+		set subject = #{subject}, content = #{content}, answer = #{answer}
+		where qnano = #{qnAno}
 	</update>
 	
 </mapper>
