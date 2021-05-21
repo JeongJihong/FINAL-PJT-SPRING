@@ -40,7 +40,7 @@ import io.swagger.annotations.ApiOperation;
 @Api("HappyHouse Article 컨트롤러 API V1")
 public class ArticleController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
 	@Autowired
 	ArticleService articleService;

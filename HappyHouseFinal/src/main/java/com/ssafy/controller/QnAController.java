@@ -38,7 +38,7 @@ import io.swagger.annotations.ApiOperation;
 @Api("HappyHouse Article 컨트롤러 API V1")
 public class QnAController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(QnAController.class);
 
 	@Autowired
 	QnAService qnaService;
