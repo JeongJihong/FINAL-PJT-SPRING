@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.repository.SidoGugunCodeMapper">
+	<select id="getSido" resultType="sidoGugunCodeDTO">
+		select left(sido_code, 2) as sidoCodeData, sido_name as sidoNameData
+		from sidocode
+		order by sidoCodeData
+	</select>
+	
+	<select id="getGugunInSido" parameterType="string" resultType="sidoGugunCodeDTO">
+		SELECT left(gugun_code, 5) as gugunCodeData, gugun_name as gugunNameData
+		FROM guguncode
+		where left(gugun_code,2) = #{sido}
+		ORDER BY gugunCodeData
+	</select>
+	
+	<select id="getDongInGugun" parameterType="string" resultType="houseInfoDTO">
+		SELECT distinct dong, code
+		FROM houseinfo
+		where code = #{gugun}
+		ORDER BY dong
+	</select>
+	
+	<select id="getAptInDong" parameterType="string" resultType="houseInfoDTO">
+		SELECT no, dong, AptName, code, jibun
+		FROM houseinfo
+		WHERE dong = #{dong}
+		ORDER BY AptName
+	</select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.repository.ArticleMapper">
+
+	<insert id="registerArticle" parameterType="articleDTO">
+		insert into article (id, subject, content, regtime)
+		values (#{id}, #{subject}, #{content}, now())
+	</insert>
+	
+	<select id="listArticle" parameterType="map" resultType="articleDTO">
+		select *
+		from article
+		<choose>
+			<when test="key == 'articleno'">
+				where articleno like concat('%', #{word}, '%')
+			</when>
+			<when test="key == 'subject'">
+				where subject like concat('%', #{word}, '%')
+			</when>
+			<when test="key == 'content'">
+				where content like concat('%', #{word}, '%')
+			</when>
+		</choose>
+	</select>
+	
+	<select id="allArticle" parameterType="map"  resultType="articleDTO">
+		select *
+		from article
+		limit #{start}, #{spp}
+	</select>
+	
+	<select id="getArticle" parameterType="int" resultType="articleDTO">
+		select *
+		from article
+		where articleno = #{articleno}
+	</select>
+	
+	<update id="modifyArticle" parameterType="articleDTO">
+		update article
+		set subject = #{subject}, content = #{content}
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteArticle" parameterType="string">
+		delete from article
+		where articleno = #{articleno}
+	</delete>
+	
+</mapper>

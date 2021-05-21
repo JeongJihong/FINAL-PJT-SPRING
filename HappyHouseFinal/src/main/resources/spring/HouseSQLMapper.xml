@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.repository.HouseMapper">
+
+	<insert id="loadData">
+		
+	</insert>
+	
+	<select id="searchAll" parameterType="housepagebean" resultType="houseDeal">
+		select *
+		from housedeal
+		where dong = #{dong}
+	</select>
+	
+	<select id="search" parameterType="int" resultType="houseDeal">
+		
+	</select>
+	
+	<select id="searchByAptName" parameterType="houseDeal" resultType="houseDeal">
+		select *
+		from housedeal
+		where AptName like concat('%', #{aptName}, '%')
+	</select>
+	
+	<select id="searchByAptNameDong" parameterType="houseDeal" resultType="houseDeal">
+		select *
+		from housedeal
+		where AptName like #{aptName} and dong like #{dong}
+	</select>
+	
+</mapper>
