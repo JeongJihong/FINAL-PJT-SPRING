@@ -22,7 +22,7 @@ import com.ssafy.service.SearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-//삭제
+// 삭제 
 @RestController
 @Api("HappyHouse Search 컨트롤러 API V1")
 @RequestMapping("/search")
