@@ -127,4 +127,19 @@ public class QnaController {
 		}
 		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "해당 번호의 글목록 정보를 반환한다.", response = List.class)
+	@GetMapping("{qnano}")
+	private ResponseEntity<QnaDTO> searchQna(@PathVariable String qnano, @RequestParam Map<String, String> map) {
+		logger.debug("search");
+		
+		int no = Integer.parseInt(qnano);
+		try {
+			return new ResponseEntity<>(qnaService.getQna(no), HttpStatus.OK);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
