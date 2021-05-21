@@ -24,6 +24,14 @@ public class QnaDTO {
 		this.answer = answer;
 	}
 
+	public int getQnAno() {
+		return qnano;
+	}
+
+	public void setQnAno(int qnano) {
+		this.qnano = qnano;
+	}
+
 	public int getQnano() {
 		return qnano;
 	}
