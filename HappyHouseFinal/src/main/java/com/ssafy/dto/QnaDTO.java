@@ -1,6 +1,6 @@
 package com.ssafy.dto;
 
-public class QnADTO {
+public class QnaDTO {
 
 	private int qnano;
 	private String id;
@@ -10,11 +10,11 @@ public class QnADTO {
 	private String answer;
 
 	
-	public QnADTO() {
+	public QnaDTO() {
 		super();
 	}
 
-	public QnADTO(int qnano, String id, String subject, String content, String regtime, String answer) {
+	public QnaDTO(int qnano, String id, String subject, String content, String regtime, String answer) {
 		super();
 		this.qnano = qnano;
 		this.id = id;
@@ -24,11 +24,11 @@ public class QnADTO {
 		this.answer = answer;
 	}
 
-	public int getQnAno() {
+	public int getQnano() {
 		return qnano;
 	}
 
-	public void setQnAno(int qnano) {
+	public void setQnano(int qnano) {
 		this.qnano = qnano;
 	}
 
