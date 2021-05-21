@@ -7,14 +7,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.dto.EnvCheckDTO;
 import com.ssafy.dto.HospitalDTO;
 import com.ssafy.dto.HouseDeal;
 import com.ssafy.dto.HouseInfoDTO;
 import com.ssafy.dto.HousePageBean;
 import com.ssafy.dto.InterestDTO;
 import com.ssafy.dto.SidoGugunCodeDTO;
-import com.ssafy.repository.EnvCheckMapper;
 import com.ssafy.repository.HospitalMapper;
 import com.ssafy.repository.HouseMapper;
 import com.ssafy.repository.InterestMapper;
@@ -26,35 +24,35 @@ public class SearchServiceImpl implements SearchService{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Override
-	public List<EnvCheckDTO> searchAllEnvCheck(String dong) {
-		return sqlSession.getMapper(EnvCheckMapper.class).searchAll(dong);
-	}
+//	@Override
+//	public List<EnvCheckDTO> searchAllEnvCheck(String dong) {
+//		return sqlSession.getMapper(EnvCheckMapper.class).searchAll(dong);
+//	}
 
 	@Override
 	public List<HospitalDTO> searchAllHospital(String dong) {
 		return sqlSession.getMapper(HospitalMapper.class).searchAll(dong);
 	}
 
-	@Override
-	public List<HouseDeal> searchAllHouseDeal(HousePageBean housepagebean) {
-		return sqlSession.getMapper(HouseMapper.class).searchAll(housepagebean);
-	}
-
-	@Override
-	public List<HouseDeal> searchHouseDealByAptName(HouseDeal houseDeal) {
-		return sqlSession.getMapper(HouseMapper.class).searchByAptName(houseDeal);
-	}
-
-	@Override
-	public List<HouseDeal> searchHouseDealByAptNameDong(HouseDeal houseDeal) {
-		return sqlSession.getMapper(HouseMapper.class).searchByAptNameDong(houseDeal);
-	}
-
-	@Override
-	public HouseDeal searchHouseDeal(int no) {
-		return sqlSession.getMapper(HouseMapper.class).search(no);
-	}
+//	@Override
+//	public List<HouseDeal> searchAllHouseDeal(HousePageBean housepagebean) {
+//		return sqlSession.getMapper(HouseMapper.class).searchAll(housepagebean);
+//	}
+//
+//	@Override
+//	public List<HouseDeal> searchHouseDealByAptName(HouseDeal houseDeal) {
+//		return sqlSession.getMapper(HouseMapper.class).searchByAptName(houseDeal);
+//	}
+//
+//	@Override
+//	public List<HouseDeal> searchHouseDealByAptNameDong(HouseDeal houseDeal) {
+//		return sqlSession.getMapper(HouseMapper.class).searchByAptNameDong(houseDeal);
+//	}
+//
+//	@Override
+//	public HouseDeal searchHouseDeal(int no) {
+//		return sqlSession.getMapper(HouseMapper.class).search(no);
+//	}
 
 	@Override
 	public List<SidoGugunCodeDTO> getSido() {
