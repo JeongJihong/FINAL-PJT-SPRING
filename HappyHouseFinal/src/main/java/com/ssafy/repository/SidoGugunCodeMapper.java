@@ -12,6 +12,4 @@ public interface SidoGugunCodeMapper {
 	public List<SidoGugunCodeDTO> getGugunInSido(String sido);
 	
 	public List<HouseInfoDTO> getDongInGugun(String gugun);
-	
-	public List<HouseInfoDTO> getAptInDong(String dong);
 }

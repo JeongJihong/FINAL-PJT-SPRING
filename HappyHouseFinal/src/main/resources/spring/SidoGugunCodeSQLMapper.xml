@@ -22,11 +22,4 @@
 		where code = #{gugun}
 		ORDER BY dong
 	</select>
-	
-	<select id="getAptInDong" parameterType="string" resultType="houseInfoDTO">
-		SELECT no, dong, AptName, code, jibun
-		FROM houseinfo
-		WHERE dong = #{dong}
-		ORDER BY AptName
-	</select>
 </mapper>

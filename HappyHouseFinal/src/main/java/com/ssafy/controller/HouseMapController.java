@@ -105,29 +105,6 @@ public class HouseMapController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "동 이름을 받아 아파트 목록을 반환한다.", response = List.class)
-	@GetMapping("/apt/{text}")
-	private ResponseEntity<List<Map<String, String>>> searchApt(@PathVariable String text) {
-		List<Map<String, String>> result = new ArrayList<Map<String, String>>();
-		List<HouseInfoDTO> list = null;
-		try {
-			list = searchService.getAptInDong(text);
-			for(HouseInfoDTO dto : list) {
-				Map<String, String> obj = new HashMap<String, String>();
-				obj.put("no", dto.getNo());
-				obj.put("dong", dto.getDong());
-				obj.put("aptName", dto.getAptName());
-				obj.put("code", dto.getCode());
-				obj.put("jibun", dto.getJibun());
-				result.add(obj);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
-	
 	@ApiOperation(value = "id를 받아 관심 정보 목록(동 이름)을 반환한다.", response = List.class)
 	@GetMapping("/interest/{id}")
 	private ResponseEntity<List<Map<String, String>>> searchInterest(@PathVariable String id) {

@@ -26,7 +26,6 @@ public interface SearchService {
 	List<SidoGugunCodeDTO> getSido();
 	List<SidoGugunCodeDTO> getGugunInSido(String sido);
 	List<HouseInfoDTO> getDongInGugun(String gugun);
-	List<HouseInfoDTO> getAptInDong(String dong) ;
 	
 	// 관심지역 추가
 	public void insertInterest(InterestDTO interestDTO);

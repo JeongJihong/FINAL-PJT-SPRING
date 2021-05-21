@@ -70,11 +70,6 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public List<HouseInfoDTO> getAptInDong(String dong) {
-		return sqlSession.getMapper(SidoGugunCodeMapper.class).getAptInDong(dong);
-	}
-
-	@Override
 	public void insertInterest(InterestDTO interestDTO) {
 		sqlSession.getMapper(InterestMapper.class).insertInterest(interestDTO);
 	}
