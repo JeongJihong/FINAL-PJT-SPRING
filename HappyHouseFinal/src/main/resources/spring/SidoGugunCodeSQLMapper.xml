@@ -17,9 +17,9 @@
 	</select>
 	
 	<select id="getDongInGugun" parameterType="string" resultType="houseInfoDTO">
-		SELECT distinct dong, code
-		FROM houseinfo
-		where code = #{gugun}
+		SELECT distinct dong, dongcode
+		FROM dongcode
+		where dongcode = #{gugun}
 		ORDER BY dong
 	</select>
 </mapper>
