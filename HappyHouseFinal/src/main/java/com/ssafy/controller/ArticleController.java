@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssafy.dto.ArticleDTO;
+import com.ssafy.dto.QnaDTO;
 import com.ssafy.service.ArticleService;
 
 import io.swagger.annotations.Api;
@@ -126,6 +127,21 @@ public class ArticleController {
 			model.addAttribute("list", articleService.listArticle(map));
 			return new ResponseEntity<>(articleService.listArticle(map), HttpStatus.OK);
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@ApiOperation(value = "해당 번호의 글목록 정보를 반환한다.", response = List.class)
+	@GetMapping("{articleno}")
+	private ResponseEntity<ArticleDTO> searchQna(@PathVariable String articleno, @RequestParam Map<String, String> map) {
+		logger.debug("search");
+		
+		int no = Integer.parseInt(articleno);
+		try {
+			return new ResponseEntity<>(articleService.getArticle(no), HttpStatus.OK);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/qna")
-@Api("HappyHouse Article 컨트롤러 API V1")
+@Api("HappyHouse QnA 컨트롤러 API V1")
 public class QnaController {
 
 	private static final Logger logger = LoggerFactory.getLogger(QnaController.class);
