@@ -46,7 +46,7 @@ public class QnaController {
 	@ApiOperation(value = "모든 Q&A목록의 정보를 반환한다.", response = Map.class)
 	@GetMapping(value = "/list")
 	private ResponseEntity<Map<String, Object>> allListQna() {
-		logger.debug("all list article");
+		logger.debug("all list qna");
 		Map<String, Object> mapRtn = new HashMap<String, Object>();
 
 		try {
@@ -82,7 +82,7 @@ public class QnaController {
 	@ApiOperation(value = "Q&A목록의 정보를 삭제한다.", response = String.class)
 	@DeleteMapping("{qnano}")
 	private ResponseEntity<String> deleteQna(@PathVariable String qnano) {
-		logger.debug("delete article");
+		logger.debug("delete qna");
 
 		try {
 			qnaService.deleteQna(qnano);
@@ -96,7 +96,7 @@ public class QnaController {
 	@ApiOperation(value = "Q&A을 등록한다.", response = String.class)
 	@PostMapping(value = "/register")
 	private ResponseEntity<String> registerQna(@RequestBody Map<String, String> map) {
-		logger.debug("register article");
+		logger.debug("register qna");
 		
 		QnaDTO qnaDto = new QnaDTO();
 		//qnaDto.setId((String) session.getAttribute("id"));
@@ -117,7 +117,7 @@ public class QnaController {
 	@ApiOperation(value = "해당 Q&A목록의 정보를 반환한다.", response = List.class)
 	@GetMapping(value = "/search")
 	private ResponseEntity<Map<String, Object>> searchQna(@RequestParam Map<String, String> map) {
-		logger.debug("search");
+		logger.debug("qna search");
 		System.out.println(map.get("key") + "|" + map.get("word"));
 		Map<String, Object> mapRtn = new HashMap<String, Object>();
 		try {

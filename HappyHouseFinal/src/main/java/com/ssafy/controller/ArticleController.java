@@ -68,21 +68,22 @@ public class ArticleController {
 
 	@ApiOperation(value = "글목록의 정보를 수정한다.", response = Map.class)
 	@PutMapping("{articleno}")
-	private ResponseEntity<Map<String, Object>> modifyArticle(@PathVariable String articleno) {
+	private ResponseEntity<String> modifyArticle(@PathVariable String articleno, @RequestBody Map<String, String> map) {
 		int no = Integer.parseInt(articleno);
-		Map<String, Object> map = new HashMap<String, Object>();
 		
 		logger.debug("modify no: " + no);
 		
 		if(no != 0) {
 			try {
 				ArticleDTO articleDTO = articleService.getArticle(no);
-				map.put("artdto", articleDTO);
+				articleDTO.setSubject(map.get("subject"));
+				articleDTO.setContent(map.get("content"));
+				articleService.modifyArticle(articleDTO);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return new ResponseEntity<>(map, HttpStatus.OK);
+		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "글목록의 정보를 삭제한다.", response = String.class)
@@ -99,15 +100,34 @@ public class ArticleController {
 		}
 	}
 
+//	@ApiOperation(value = "글을 등록한다.", response = String.class)
+//	@PostMapping(value = "/register")
+//	private ResponseEntity<String> registerArticle(@RequestBody String subject, @RequestBody String content, HttpSession session) {
+//		logger.debug("register article");
+//		
+//		ArticleDTO articleDto = new ArticleDTO();
+//		articleDto.setUserId((String) session.getAttribute("id"));
+//		articleDto.setSubject(subject);		
+//		articleDto.setContent(content);
+//		
+//		try {
+//			articleService.deleteArticle(Integer.toString(articleDto.getArticleno()));
+//			articleService.registerArticle(articleDto);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return new ResponseEntity<String>("success", HttpStatus.OK);
+//	}
+	
 	@ApiOperation(value = "글을 등록한다.", response = String.class)
 	@PostMapping(value = "/register")
-	private ResponseEntity<String> registerArticle(@RequestBody String subject, @RequestBody String content, HttpSession session) {
+	private ResponseEntity<String> registerArticle(@RequestBody Map<String, String> map) {
 		logger.debug("register article");
 		
 		ArticleDTO articleDto = new ArticleDTO();
-		articleDto.setUserId((String) session.getAttribute("id"));
-		articleDto.setSubject(subject);		
-		articleDto.setContent(content);
+		articleDto.setUserId("ssafy");
+		articleDto.setSubject(map.get("subject"));		
+		articleDto.setContent(map.get("content"));
 		
 		try {
 			articleService.deleteArticle(Integer.toString(articleDto.getArticleno()));
@@ -118,18 +138,32 @@ public class ArticleController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 
+//	@ApiOperation(value = "해당 글목록의 정보를 반환한다.", response = List.class)
+//	@GetMapping(value = "/search")
+//	private ResponseEntity<List<ArticleDTO>> searchArticle(@RequestParam Map<String, String> map, Model model) {
+//		logger.debug("search");
+//		//Map<String, Object> mapRtn = new HashMap<String, Object>();
+//		try {
+//			model.addAttribute("list", articleService.listArticle(map));
+//			return new ResponseEntity<>(articleService.listArticle(map), HttpStatus.OK);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+	
 	@ApiOperation(value = "해당 글목록의 정보를 반환한다.", response = List.class)
 	@GetMapping(value = "/search")
-	private ResponseEntity<List<ArticleDTO>> searchArticle(@RequestParam Map<String, String> map, Model model) {
-		logger.debug("search");
-		//Map<String, Object> mapRtn = new HashMap<String, Object>();
+	private ResponseEntity<Map<String, Object>> searchArticle(@RequestParam Map<String, String> map) {
+		logger.debug("article search");
+		System.out.println(map.get("key") + "|" + map.get("word"));
+		Map<String, Object> mapRtn = new HashMap<String, Object>();
 		try {
-			model.addAttribute("list", articleService.listArticle(map));
-			return new ResponseEntity<>(articleService.listArticle(map), HttpStatus.OK);
+			mapRtn.put("list", articleService.listArticle(map));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "해당 번호의 글목록 정보를 반환한다.", response = List.class)
