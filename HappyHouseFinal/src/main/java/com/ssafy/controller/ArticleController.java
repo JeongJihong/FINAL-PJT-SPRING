@@ -46,24 +46,38 @@ public class ArticleController {
 	@Autowired
 	ArticleService articleService;
 	
-	@ApiOperation(value = "모든 글목록의 정보를 반환한다.", response = Model.class)
+//	@ApiOperation(value = "모든 글목록의 정보를 반환한다.", response = Model.class)
+//	@GetMapping(value = "/list")
+//	private ResponseEntity<Model> allListArticle(@RequestParam Map<String, String> map, Model model) {
+//		logger.debug("all list article");
+//		Map<String, Object> mapRtn = new HashMap<String, Object>();
+//		String pg = map.containsKey("pg") ? map.get("pg") : null;
+//		String spp = map.containsKey("spp") ? map.get("spp") : null;
+//		
+//		int currentPage = pg == null? 1 : Integer.parseInt(pg);
+//		currentPage = currentPage == 0 ? 1 : currentPage; 
+//		int sizePerPage = spp == null ? 10 : Integer.parseInt(spp);//sizePerPage
+//		
+//		try {
+//			model.addAttribute("list", articleService.allArticle(currentPage, sizePerPage) );
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return new ResponseEntity<>(model, HttpStatus.OK);
+//	}
+
+	@ApiOperation(value = "모든  글목록의 정보를 반환한다.", response = Map.class)
 	@GetMapping(value = "/list")
-	private ResponseEntity<Model> allListArticle(@RequestParam Map<String, String> map, Model model) {
+	private ResponseEntity<Map<String, Object>> allListQna() {
 		logger.debug("all list article");
 		Map<String, Object> mapRtn = new HashMap<String, Object>();
-		String pg = map.containsKey("pg") ? map.get("pg") : null;
-		String spp = map.containsKey("spp") ? map.get("spp") : null;
-		
-		int currentPage = pg == null? 1 : Integer.parseInt(pg);
-		currentPage = currentPage == 0 ? 1 : currentPage; 
-		int sizePerPage = spp == null ? 10 : Integer.parseInt(spp);//sizePerPage
-		
+
 		try {
-			model.addAttribute("list", articleService.allArticle(currentPage, sizePerPage) );
+			mapRtn.put("list", articleService.allArticle() );
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<>(model, HttpStatus.OK);
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "글목록의 정보를 수정한다.", response = Map.class)

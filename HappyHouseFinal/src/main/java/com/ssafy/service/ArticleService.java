@@ -14,7 +14,7 @@ public interface ArticleService {
 	List<ArticleDTO> listArticle(Map<String, String> map) throws SQLException;
 
 // 	글 목록
-	List<ArticleDTO> allArticle(int currentPage, int sizePerPage) throws SQLException;	
+	List<ArticleDTO> allArticle() throws SQLException;	
 	
 //	글수정을 위한 글얻기
 	ArticleDTO getArticle(int articleno) throws SQLException;

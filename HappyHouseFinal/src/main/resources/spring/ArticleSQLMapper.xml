@@ -25,10 +25,9 @@
 		</choose>
 	</select>
 	
-	<select id="allArticle" parameterType="map"  resultType="articleDTO">
+	<select id="allArticle"  resultType="articleDTO">
 		select *
 		from article
-		limit #{start}, #{spp}
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultType="articleDTO">

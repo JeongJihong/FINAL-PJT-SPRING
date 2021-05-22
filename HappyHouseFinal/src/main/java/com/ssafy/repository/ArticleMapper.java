@@ -14,7 +14,7 @@ public interface ArticleMapper {
 	List<ArticleDTO> listArticle(Map<String, String> map) throws SQLException;
 
 // 	글 목록
-	List<ArticleDTO> allArticle(Map<String, Integer> map) throws SQLException;
+	List<ArticleDTO> allArticle() throws SQLException;
 	
 //	글수정을 위한 글얻기
 	ArticleDTO getArticle(int articleno) throws SQLException;

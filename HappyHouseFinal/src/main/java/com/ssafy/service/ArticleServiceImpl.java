@@ -28,12 +28,8 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 
 	@Override
-	public List<ArticleDTO> allArticle(int currentPage, int sizePerPage) throws SQLException {
-		Map<String, Integer> param = new HashMap<String, Integer>();
-		int start = (currentPage - 1) * sizePerPage;
-		param.put("start", start);
-		param.put("spp", sizePerPage);
-		return sqlSession.getMapper(ArticleMapper.class).allArticle(param);
+	public List<ArticleDTO> allArticle() throws SQLException {
+		return sqlSession.getMapper(ArticleMapper.class).allArticle();
 	}
 
 	@Override
