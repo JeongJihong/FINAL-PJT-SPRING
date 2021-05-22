@@ -43,7 +43,7 @@ public class QnaController {
 	@Autowired
 	QnaService qnaService;
 	
-	@ApiOperation(value = "모든 글목록의 정보를 반환한다.", response = Map.class)
+	@ApiOperation(value = "모든 Q&A목록의 정보를 반환한다.", response = Map.class)
 	@GetMapping(value = "/list")
 	private ResponseEntity<Map<String, Object>> allListQna() {
 		logger.debug("all list article");
@@ -57,7 +57,7 @@ public class QnaController {
 		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "글목록의 정보를 수정한다.", response = Map.class)
+	@ApiOperation(value = "Q&A목록의 정보를 수정한다.", response = Map.class)
 	@PutMapping("{qnano}")
 	private ResponseEntity<String> modifyQna(@PathVariable String qnano, @RequestBody Map<String, String> map) {
 		int no = Integer.parseInt(qnano);
@@ -79,7 +79,7 @@ public class QnaController {
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "글목록의 정보를 삭제한다.", response = String.class)
+	@ApiOperation(value = "Q&A목록의 정보를 삭제한다.", response = String.class)
 	@DeleteMapping("{qnano}")
 	private ResponseEntity<String> deleteQna(@PathVariable String qnano) {
 		logger.debug("delete article");
@@ -93,7 +93,7 @@ public class QnaController {
 		}
 	}
 
-	@ApiOperation(value = "글을 등록한다.", response = String.class)
+	@ApiOperation(value = "Q&A을 등록한다.", response = String.class)
 	@PostMapping(value = "/register")
 	private ResponseEntity<String> registerQna(@RequestBody Map<String, String> map) {
 		logger.debug("register article");
@@ -114,7 +114,7 @@ public class QnaController {
 		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "해당 글목록의 정보를 반환한다.", response = List.class)
+	@ApiOperation(value = "해당 Q&A목록의 정보를 반환한다.", response = List.class)
 	@GetMapping(value = "/search")
 	private ResponseEntity<Map<String, Object>> searchQna(@RequestParam Map<String, String> map) {
 		logger.debug("search");
@@ -128,7 +128,7 @@ public class QnaController {
 		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "해당 번호의 글목록 정보를 반환한다.", response = List.class)
+	@ApiOperation(value = "해당 번호의 Q&A목록 정보를 반환한다.", response = List.class)
 	@GetMapping("{qnano}")
 	private ResponseEntity<QnaDTO> searchQna(@PathVariable String qnano, @RequestParam Map<String, String> map) {
 		logger.debug("search");
