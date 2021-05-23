@@ -1,8 +1,8 @@
 package com.ssafy.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -88,20 +86,22 @@ public class MemberController {
 		}
 	}
 
-	@ApiOperation(value = "로그인 한다.", response = String.class)
-	@PostMapping(value = "/login")
-	public ResponseEntity<String> login(@RequestBody Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
+	@ApiOperation(value = "로그인 한다.", response = Map.class)
+	@GetMapping(value = "/login")
+	public ResponseEntity<Map<String, String>> login(@RequestParam Map<String, String> map) {
 		logger.debug("login");
+		Map<String, String> mapRtn = new HashMap<String, String>();
 		
 		MemberDTO memberDTO = memberService.login(map);
 		if(memberDTO != null) {
-			session.setAttribute("id", map.get("id"));
+			mapRtn.put("id", memberDTO.getId());
 			logger.info("성공");
-			return new ResponseEntity<>("success", HttpStatus.OK);
+			return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 			
 		} else {
-			model.addAttribute("msg", "아이디 또는 패스워드가 일치하지 않습니다.");
-			return new ResponseEntity<>("fail", HttpStatus.OK);
+			mapRtn.put("id", "");
+			mapRtn.put("msg", "아이디 또는 패스워드가 일치하지 않습니다.");
+			return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 		}
 
 	}
