@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,8 @@ import com.ssafy.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+
+@CrossOrigin("*")
 @RestController
 @Api("HappyHouse Member 컨트롤러 API V1")
 @RequestMapping("/mem")
@@ -35,39 +38,6 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-
-//	@RequestMapping(value = "/mvlogin", method = RequestMethod.GET)
-//	public String mvLogin() {
-//		logger.debug("mv login");
-//		return "jsp/login";
-//	}
-	
-//	@RequestMapping(value = "/mvinsertmember", method = RequestMethod.GET)
-//	public String mvInsertMember() {
-//		logger.debug("mv insert member");
-//		return "jsp/insertMember";
-//	}
-	
-//	@ApiOperation(value = "회원 상세 페이지를 나타낸다.", response = Map.class)
-//	@RequestMapping(value = "/mvuserinfo", method = RequestMethod.GET)
-//	private String userInfo(HttpSession session) {
-//		logger.debug("mv userinfo");
-//		
-//		String id = (String) session.getAttribute("id");
-//		if(id != null) {
-//			MemberDTO memberDTO = memberService.searchId(id);
-//			session.setAttribute("mem", memberDTO);
-//			return "jsp/insertMember";
-//		}
-//		
-//		return "jsp/insertMember";
-//	}
-
-//	@RequestMapping(value = "/mvfindpassword", method = RequestMethod.GET)
-//	public String mvFindPassword() {
-//		logger.debug("mv findpassword");
-//		return "jsp/findpassword";
-//	}
 
 	@ApiOperation(value = "비밀번호를 찾는다.", response = String.class)
 	@PostMapping(value = "/findpassword")
@@ -87,18 +57,21 @@ public class MemberController {
 	}
 
 	@ApiOperation(value = "로그인 한다.", response = Map.class)
-	@GetMapping(value = "/login")
-	public ResponseEntity<Map<String, String>> login(@RequestParam Map<String, String> map) {
+	@PostMapping(value = "/login")
+	public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> map) {
 		logger.debug("login");
+		logger.debug(map.get("id"));
+		logger.debug(map.get("password"));
 		Map<String, String> mapRtn = new HashMap<String, String>();
 		
 		MemberDTO memberDTO = memberService.login(map);
 		if(memberDTO != null) {
 			mapRtn.put("id", memberDTO.getId());
-			logger.info("성공");
+			logger.info("로그인 성공");
 			return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 			
 		} else {
+			logger.info("로그인 실패");
 			mapRtn.put("id", "");
 			mapRtn.put("msg", "아이디 또는 패스워드가 일치하지 않습니다.");
 			return new ResponseEntity<>(mapRtn, HttpStatus.OK);
