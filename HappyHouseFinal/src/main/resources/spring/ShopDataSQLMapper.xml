@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.repository.ShopDataMapper">
+	<select id="getShopData" parameterType="map" resultType="shopDataDTO">
+		SELECT type, count
+		FROM shopdata
+		WHERE gugun_code = #{gugun} and dong = #{dong} 
+	</select>
+	
+	<select id="getShopDataAvg" parameterType="map" resultType="shopDataDTO">
+		SELECT type, avg(count) AS count
+		FROM shopdata
+		WHERE gugun_code = #{gugun}
+		GROUP BY type
+	</select>
+</mapper>
