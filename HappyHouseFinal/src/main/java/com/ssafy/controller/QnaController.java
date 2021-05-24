@@ -100,7 +100,7 @@ public class QnaController {
 		
 		QnaDTO qnaDto = new QnaDTO();
 		//qnaDto.setId((String) session.getAttribute("id"));
-		qnaDto.setId("ssafy");
+		qnaDto.setId(map.get("id"));
 		qnaDto.setSubject(map.get("subject"));		
 		qnaDto.setContent(map.get("content"));
 		qnaDto.setAnswer(map.get("answer"));

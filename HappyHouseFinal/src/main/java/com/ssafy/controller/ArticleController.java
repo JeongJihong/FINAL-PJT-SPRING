@@ -139,7 +139,7 @@ public class ArticleController {
 		logger.debug("register article");
 		
 		ArticleDTO articleDto = new ArticleDTO();
-		articleDto.setUserId("ssafy");
+		articleDto.setUserId(map.get("id"));
 		articleDto.setSubject(map.get("subject"));		
 		articleDto.setContent(map.get("content"));
 		
