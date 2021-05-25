@@ -6,7 +6,8 @@
 	<select id="getShopData" parameterType="map" resultType="shopDataDTO">
 		SELECT city, gugun, dong, type, count
 		FROM shopdata
-		WHERE gugun_code = #{gugun} and dong = #{dong} 
+		WHERE gugun_code = #{gugun} and dong = #{dong}
+		ORDER BY type
 	</select>
 	
 	<select id="getShopDataAvg" parameterType="map" resultType="shopDataDTO">
@@ -14,5 +15,6 @@
 		FROM shopdata
 		WHERE gugun_code = #{gugun}
 		GROUP BY type
+		ORDER BY type
 	</select>
 </mapper>
