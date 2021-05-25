@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="getShopDataAvg" parameterType="map" resultType="shopDataDTO">
-		SELECT type, avg(count) AS count
+		SELECT city, gugun, type, avg(count) AS count
 		FROM shopdata
 		WHERE gugun_code = #{gugun}
 		GROUP BY type
