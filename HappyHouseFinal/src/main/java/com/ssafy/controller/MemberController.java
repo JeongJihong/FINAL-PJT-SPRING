@@ -110,14 +110,9 @@ public class MemberController {
 
 	@ApiOperation(value = "회원정보를 수정한다.", response = String.class)
 	@PutMapping(value = "/update")
-	public ResponseEntity<String> updateMember(@RequestBody MemberDTO memberDTO, Model model, HttpSession session) {
+	public ResponseEntity<String> updateMember(@RequestBody MemberDTO memberDTO) {
 		logger.debug("update member");
-		memberDTO.setId((String)session.getAttribute("id"));
 		memberService.update(memberDTO);
-		model.addAttribute("msg", "회원정보 수정이 완료되었습니다.");
-		
-		MemberDTO result = memberService.searchId((String)session.getAttribute("id"));
-		session.setAttribute("mem", result);
 		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
