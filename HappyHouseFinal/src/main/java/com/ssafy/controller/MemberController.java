@@ -67,6 +67,11 @@ public class MemberController {
 		MemberDTO memberDTO = memberService.login(map);
 		if(memberDTO != null) {
 			mapRtn.put("id", memberDTO.getId());
+			mapRtn.put("password", memberDTO.getPassword());
+			mapRtn.put("name", memberDTO.getName());
+			mapRtn.put("email", memberDTO.getEmail());
+			mapRtn.put("address", memberDTO.getAddress());
+			
 			logger.info("로그인 성공");
 			return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 			
