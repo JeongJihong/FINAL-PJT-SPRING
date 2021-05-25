@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.repository.ShopDataMapper">
 	<select id="getShopData" parameterType="map" resultType="shopDataDTO">
-		SELECT type, count
+		SELECT city, gugun, dong, type, count
 		FROM shopdata
 		WHERE gugun_code = #{gugun} and dong = #{dong} 
 	</select>
