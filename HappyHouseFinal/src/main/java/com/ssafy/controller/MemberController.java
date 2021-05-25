@@ -92,20 +92,22 @@ public class MemberController {
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "회원정보를 추가한다.", response = String.class)
+	@ApiOperation(value = "회원정보를 추가한다.", response = Map.class)
 	@PostMapping(value = "/insert")
-	public ResponseEntity<String> insertMember(@RequestBody MemberDTO memberDTO, Model model) {
+	public ResponseEntity<Map<String, String>> insertMember(@RequestBody MemberDTO memberDTO) {
 		logger.debug("insert member");
+		Map<String, String> mapRtn = new HashMap<String, String>();
+		
 		if(memberService.searchId(memberDTO.getId()) == null) {
 			memberService.insertMember(memberDTO);
-			model.addAttribute("msg", "회원가입이 완료되었습니다.");
+			mapRtn.put("msg", "");
 			
 		} else {
-			model.addAttribute("msg", "이미 등록된 회원입니다.");
+			mapRtn.put("msg", "이미 등록된 회원입니다.");
 			
 		}
 		
-		return new ResponseEntity<>("success", HttpStatus.OK);
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "회원정보를 수정한다.", response = String.class)
