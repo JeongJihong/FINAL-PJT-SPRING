@@ -126,17 +126,19 @@ public class HouseMapController {
 	
 	@ApiOperation(value = "새로운 관심 정보(동 이름)를 추가한다.", response = String.class)
 	@PostMapping("/interest")
-	private ResponseEntity<String> insertInterest(@RequestBody InterestDTO interest) {
+	private ResponseEntity<List<InterestDTO>> insertInterest(@RequestBody InterestDTO interest) {
 		System.out.println(interest.getId() + " : " + interest.getDong());
 		searchService.insertInterest(interest);
-		return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+		List<InterestDTO> result = searchService.searchAllInterest(interest.getId());
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "관심 정보(동 이름)를 받아 삭제한다.", response = String.class)
 	@DeleteMapping("/interest")
-	private ResponseEntity<String> deleteInterest(@RequestBody InterestDTO interest) {
+	private ResponseEntity<List<InterestDTO>> deleteInterest(@RequestBody InterestDTO interest) {
 		System.out.println(interest.getId() + " : " + interest.getDong());
 		searchService.deleteInterest(interest);
-		return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+		List<InterestDTO> result = searchService.searchAllInterest(interest.getId());
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 }
