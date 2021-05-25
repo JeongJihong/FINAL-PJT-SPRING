@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ import com.ssafy.service.SearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin("*")
 @RestController
 @Api("HappyHouse HouseMap 컨트롤러 API V1")
 @RequestMapping("/map")
@@ -124,7 +126,7 @@ public class HouseMapController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "새로운 관심 정보(동 이름)를 추가한다.", response = String.class)
+	@ApiOperation(value = "새로운 관심 정보(동 이름)를 추가한다.", response = List.class)
 	@PostMapping("/interest")
 	private ResponseEntity<List<InterestDTO>> insertInterest(@RequestBody InterestDTO interest) {
 		System.out.println(interest.getId() + " : " + interest.getDong());
@@ -133,7 +135,7 @@ public class HouseMapController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "관심 정보(동 이름)를 받아 삭제한다.", response = String.class)
+	@ApiOperation(value = "관심 정보(동 이름)를 받아 삭제한다.", response = List.class)
 	@DeleteMapping("/interest")
 	private ResponseEntity<List<InterestDTO>> deleteInterest(@RequestBody InterestDTO interest) {
 		System.out.println(interest.getId() + " : " + interest.getDong());

@@ -9,7 +9,7 @@
 		values (#{id}, #{dong})
 	</insert>
 	
-	<delete id="deleteInterest" parameterType="map">
+	<delete id="deleteInterest" parameterType="interestDTO">
 		delete from interest
 		where id = #{id} and dong = #{dong}
 	</delete>
