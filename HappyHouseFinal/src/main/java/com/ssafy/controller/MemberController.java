@@ -39,20 +39,21 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@ApiOperation(value = "비밀번호를 찾는다.", response = String.class)
+	@ApiOperation(value = "비밀번호를 찾는다.", response = Map.class)
 	@PostMapping(value = "/findpassword")
-	public ResponseEntity<String> findPassword(@RequestBody MemberDTO memberDTO, Model model) {
+	public ResponseEntity<Map<String, String>> findPassword(@RequestBody MemberDTO memberDTO) {
 		logger.debug("findpassword");
+		Map<String, String> mapRtn = new HashMap<String, String>();
 		
 		MemberDTO result = memberService.findPassword(memberDTO);
 		
 		if(result == null) {
-			model.addAttribute("msg", "일치하는 정보를 찾을 수 없습니다.");
-			return new ResponseEntity<String>("success", HttpStatus.OK);
+			mapRtn.put("msg", "일치하는 정보를 찾을 수 없습니다.");
+			return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 			
 		} else {
-			model.addAttribute("msg", "비밀번호는 " + result.getPassword() + " 입니다.");
-			return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+			mapRtn.put("msg", "비밀번호는 " + result.getPassword() + " 입니다.");
+			return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 		}
 	}
 
