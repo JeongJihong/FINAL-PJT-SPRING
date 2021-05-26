@@ -82,8 +82,9 @@ public class ArticleController {
 
 	@ApiOperation(value = "글목록의 정보를 수정한다.", response = Map.class)
 	@PutMapping("{articleno}")
-	private ResponseEntity<String> modifyArticle(@PathVariable String articleno, @RequestBody Map<String, String> map) {
+	private ResponseEntity<Map<String, Object>> modifyArticle(@PathVariable String articleno, @RequestBody Map<String, String> map) {
 		int no = Integer.parseInt(articleno);
+		Map<String, Object> mapRtn = new HashMap<String, Object>();
 		
 		logger.debug("modify no: " + no);
 		
@@ -93,25 +94,28 @@ public class ArticleController {
 				articleDTO.setSubject(map.get("subject"));
 				articleDTO.setContent(map.get("content"));
 				articleService.modifyArticle(articleDTO);
+				mapRtn.put("list", articleService.allArticle() );
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return new ResponseEntity<>("success", HttpStatus.OK);
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "글목록의 정보를 삭제한다.", response = String.class)
 	@DeleteMapping("{articleno}")
-	private ResponseEntity<String> deleteArticle(@PathVariable String articleno) {
+	private ResponseEntity<Map<String, Object>> deleteArticle(@PathVariable String articleno) {
 		logger.debug("delete article");
+		Map<String, Object> mapRtn = new HashMap<String, Object>();
 
 		try {
 			articleService.deleteArticle(articleno);
-			return new ResponseEntity<String>("success", HttpStatus.OK);
+			mapRtn.put("list", articleService.allArticle() );
+			mapRtn.put("msg", "success");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
 		}
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
 //	@ApiOperation(value = "글을 등록한다.", response = String.class)
@@ -133,10 +137,11 @@ public class ArticleController {
 //		return new ResponseEntity<String>("success", HttpStatus.OK);
 //	}
 	
-	@ApiOperation(value = "글을 등록한다.", response = String.class)
+	@ApiOperation(value = "글을 등록한다.", response = Map.class)
 	@PostMapping(value = "/register")
-	private ResponseEntity<String> registerArticle(@RequestBody Map<String, String> map) {
+	private ResponseEntity<Map<String, Object>> registerArticle(@RequestBody Map<String, String> map) {
 		logger.debug("register article");
+		Map<String, Object> mapRtn = new HashMap<String, Object>();
 		
 		ArticleDTO articleDto = new ArticleDTO();
 		articleDto.setUserId(map.get("id"));
@@ -146,10 +151,11 @@ public class ArticleController {
 		try {
 			articleService.deleteArticle(Integer.toString(articleDto.getArticleno()));
 			articleService.registerArticle(articleDto);
+			mapRtn.put("list", articleService.allArticle() );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>("success", HttpStatus.OK);
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
 //	@ApiOperation(value = "해당 글목록의 정보를 반환한다.", response = List.class)

@@ -59,10 +59,11 @@ public class QnaController {
 
 	@ApiOperation(value = "Q&A목록의 정보를 수정한다.", response = Map.class)
 	@PutMapping("{qnano}")
-	private ResponseEntity<String> modifyQna(@PathVariable String qnano, @RequestBody Map<String, String> map) {
+	private ResponseEntity<Map<String, Object>> modifyQna(@PathVariable String qnano, @RequestBody Map<String, String> map) {
 		int no = Integer.parseInt(qnano);
 		
 		logger.debug("modify no: " + no);
+		Map<String, Object> mapRtn = new HashMap<String, Object>();
 		
 		if(no != 0) {
 			try {
@@ -71,32 +72,36 @@ public class QnaController {
 				qnaDTO.setContent(map.get("content"));
 				qnaDTO.setAnswer(map.get("answer"));
 				qnaService.modifyQna(qnaDTO);
+				mapRtn.put("list", qnaService.allQna() );
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return new ResponseEntity<>("success", HttpStatus.OK);
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "Q&A목록의 정보를 삭제한다.", response = String.class)
+	@ApiOperation(value = "Q&A목록의 정보를 삭제한다.", response = Map.class)
 	@DeleteMapping("{qnano}")
-	private ResponseEntity<String> deleteQna(@PathVariable String qnano) {
+	private ResponseEntity<Map<String, Object>> deleteQna(@PathVariable String qnano) {
 		logger.debug("delete qna");
+		Map<String, Object> mapRtn = new HashMap<String, Object>();
 
 		try {
 			qnaService.deleteQna(qnano);
-			return new ResponseEntity<String>("success", HttpStatus.OK);
+			mapRtn.put("list", qnaService.allQna() );
+			mapRtn.put("msg", "success");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
 		}
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "Q&A을 등록한다.", response = String.class)
+	@ApiOperation(value = "Q&A을 등록한다.", response = Map.class)
 	@PostMapping(value = "/register")
-	private ResponseEntity<String> registerQna(@RequestBody Map<String, String> map) {
+	private ResponseEntity<Map<String, Object>> registerQna(@RequestBody Map<String, String> map) {
 		logger.debug("register qna");
+		Map<String, Object> mapRtn = new HashMap<String, Object>();
 		
 		QnaDTO qnaDto = new QnaDTO();
 		//qnaDto.setId((String) session.getAttribute("id"));
@@ -108,10 +113,11 @@ public class QnaController {
 		try {
 			qnaService.deleteQna(Integer.toString(qnaDto.getQnano()));
 			qnaService.registerQna(qnaDto);
+			mapRtn.put("list", qnaService.allQna() );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>("success", HttpStatus.OK);
+		return new ResponseEntity<>(mapRtn, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "해당 Q&A목록의 정보를 반환한다.", response = List.class)
