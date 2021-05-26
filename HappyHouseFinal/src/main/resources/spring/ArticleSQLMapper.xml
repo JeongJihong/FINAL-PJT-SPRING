@@ -39,7 +39,7 @@
 	<update id="modifyArticle" parameterType="articleDTO">
 		update article
 		set subject = #{subject}, content = #{content}
-		where id = #{id}
+		where articleno = #{articleno}
 	</update>
 	
 	<delete id="deleteArticle" parameterType="string">
