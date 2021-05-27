@@ -2,10 +2,7 @@ package com.ssafy.service;
 
 import java.util.List;
 
-import com.ssafy.dto.HospitalDTO;
-import com.ssafy.dto.HouseDeal;
 import com.ssafy.dto.HouseInfoDTO;
-import com.ssafy.dto.HousePageBean;
 import com.ssafy.dto.InterestDTO;
 import com.ssafy.dto.SidoGugunCodeDTO;
 
@@ -13,8 +10,8 @@ public interface SearchService {
 //	// 동으로 전체 목록 검색
 //	public List<EnvCheckDTO> searchAllEnvCheck(String dong);
 	
-	// 동 내 병원 조회
-	public List<HospitalDTO> searchAllHospital(String dong);
+//	// 동 내 병원 조회
+//	public List<HospitalDTO> searchAllHospital(String dong);
 	
 //	// 검색
 //	public List<HouseDeal> searchAllHouseDeal(HousePageBean housepagebean); 

@@ -1,20 +1,14 @@
 package com.ssafy.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.dto.HospitalDTO;
-import com.ssafy.dto.HouseDeal;
 import com.ssafy.dto.HouseInfoDTO;
-import com.ssafy.dto.HousePageBean;
 import com.ssafy.dto.InterestDTO;
 import com.ssafy.dto.SidoGugunCodeDTO;
-import com.ssafy.repository.HospitalMapper;
-import com.ssafy.repository.HouseMapper;
 import com.ssafy.repository.InterestMapper;
 import com.ssafy.repository.SidoGugunCodeMapper;
 
@@ -29,10 +23,10 @@ public class SearchServiceImpl implements SearchService{
 //		return sqlSession.getMapper(EnvCheckMapper.class).searchAll(dong);
 //	}
 
-	@Override
-	public List<HospitalDTO> searchAllHospital(String dong) {
-		return sqlSession.getMapper(HospitalMapper.class).searchAll(dong);
-	}
+//	@Override
+//	public List<HospitalDTO> searchAllHospital(String dong) {
+//		return sqlSession.getMapper(HospitalMapper.class).searchAll(dong);
+//	}
 
 //	@Override
 //	public List<HouseDeal> searchAllHouseDeal(HousePageBean housepagebean) {
